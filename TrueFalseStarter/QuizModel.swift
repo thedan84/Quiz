@@ -11,7 +11,8 @@ import GameKit
 
 struct QuizModel {
     
-    var questionIndex: Int
+    var questionIndex = Int()
+    var questionIndicesUsed = [Int]()
     
     let questions = [
         ["question": "This was the only US President to serve more than two consecutive terms.", "answer": "Franklin D. Roosevelt"],
@@ -39,14 +40,29 @@ struct QuizModel {
         ["France", "Germany", "Japan", "Great Britain"]
     ]
     
-    mutating func getRandomQuestionAndPossibleAnswers() -> (question: [String: String], answers: [String]) {
+    mutating func getRandomQuestion() -> [String: String] {
         let randomInt = GKRandomSource.sharedRandom().nextIntWithUpperBound(questions.count)
         self.questionIndex = randomInt
+        self.questionIndicesUsed.append(randomInt)
         
-        return (question: questions[randomInt], answers: answers[randomInt])
+//        var question = [String: String]()
+//        
+//        for index in questionIndicesUsed {
+//            if questionIndex != index {
+//                question = questions[randomInt]
+//            } else {
+//                break
+//            }
+//        }
+        
+        return questions[randomInt]
     }
     
-    func getCorrectAnswerToQuestion(questionIndex: Int) -> String {
+    func getPossibleAnswersToRandomQuestion() -> [String] {
+        return answers[questionIndex]
+    }
+    
+    func getCorrectAnswerToQuestion() -> String {
         let question = questions[questionIndex]
         let answer = question["answer"]
         return answer!
