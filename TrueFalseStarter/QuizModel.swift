@@ -45,6 +45,9 @@ struct QuizModel {
         self.questionIndex = randomInt
         self.questionIndicesUsed.append(randomInt)
         
+        //TODO: Add check to see if question has been asked during the current round!!!!
+        
+        
 //        var question = [String: String]()
 //        
 //        for index in questionIndicesUsed {
