@@ -40,25 +40,31 @@ struct QuizModel {
         ["France", "Germany", "Japan", "Great Britain"]
     ]
     
-    mutating func getRandomQuestion() -> [String: String] {
-        let randomInt = GKRandomSource.sharedRandom().nextIntWithUpperBound(questions.count)
-        self.questionIndex = randomInt
-        self.questionIndicesUsed.append(randomInt)
+    mutating func getRandomQuestion() -> [String: String]? {
+        let randomInt = createRandomInt()
         
-        //TODO: Add check to see if question has been asked during the current round!!!!
+        if !questionHasBeenAskedBefore(randomInt) {
+            self.questionIndex = randomInt
+            self.questionIndicesUsed.append(randomInt)
+            
+            return questions[randomInt]
+        } else {
+            return nil
+        }
+    }
+    
+    func questionHasBeenAskedBefore(question: Int) -> Bool {
+        var isUsed = Bool()
         
+        for index in questionIndicesUsed {
+            isUsed = index == question
+        }
         
-//        var question = [String: String]()
-//        
-//        for index in questionIndicesUsed {
-//            if questionIndex != index {
-//                question = questions[randomInt]
-//            } else {
-//                break
-//            }
-//        }
-        
-        return questions[randomInt]
+        return isUsed
+    }
+    
+    func createRandomInt() -> Int {
+        return GKRandomSource.sharedRandom().nextIntWithUpperBound(questions.count)
     }
     
     func getPossibleAnswersToRandomQuestion() -> [String] {

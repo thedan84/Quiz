@@ -42,24 +42,21 @@ class ViewController: UIViewController {
     
     func displayQuestion() {
         
-        let question = quizModel.getRandomQuestion()["question"]
-        questionField.text = question
-        
-        let answers = quizModel.getPossibleAnswersToRandomQuestion()
-
-        for button in [answer1Button, answer2Button, answer3Button, answer4Button] {
-            let answer = answers[button.tag - 1]
-            button.setTitle(answer, forState: .Normal)
+        if let question = quizModel.getRandomQuestion()?["question"] {
+            questionField.text = question
+            
+            let answers = quizModel.getPossibleAnswersToRandomQuestion()
+            
+            for button in [answer1Button, answer2Button, answer3Button, answer4Button] {
+                let answer = answers[button.tag - 1]
+                button.setTitle(answer, forState: .Normal)
+            }
         }
         
         playAgainButton.hidden = true
     }
     
-    func displayScore() {
-        // Hide the answer buttons
-//        trueButton.hidden = true
-//        falseButton.hidden = true
-        
+    func displayScore() {        
         // Display play again button
         playAgainButton.hidden = false
         
@@ -95,12 +92,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func playAgain() {
-        // Show the answer buttons
-//        trueButton.hidden = false
-//        falseButton.hidden = false
-        
         questionsAsked = 0
         correctQuestions = 0
+        quizModel.questionIndicesUsed = []
         nextRound()
     }
     
