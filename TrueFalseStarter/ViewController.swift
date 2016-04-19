@@ -47,9 +47,17 @@ class ViewController: UIViewController {
             
             let answers = quizModel.getPossibleAnswersToRandomQuestion()
             
-            for button in [answer1Button, answer2Button, answer3Button, answer4Button] {
-                let answer = answers[button.tag - 1]
-                button.setTitle(answer, forState: .Normal)
+            if answers.count == 4 {
+                for button in [answer1Button, answer2Button, answer3Button, answer4Button] {
+                    let answer = answers[button.tag - 1]
+                    button.setTitle(answer, forState: .Normal)
+                }
+            } else if answers.count == 3 {
+                for button in [answer1Button, answer2Button, answer3Button] {
+                    answer4Button.hidden = true
+                    let answer = answers[button.tag - 1]
+                    button.setTitle(answer, forState: .Normal)
+                }
             }
         }
         
