@@ -24,7 +24,7 @@ struct QuizModel {
         ["question": "Which of the following rivers is longest?", "answer": "Mississippi"],
         ["question": "Which city is the oldest?", "answer": "Mexico City"],
         ["question": "Which country was the first to allow women to vote in national elections?", "answer": "Poland"],
-        ["question": "Which of these countries won the most medals in the 2012 Summer Games?", "answer": "Great Britian"]
+        ["question": "Which of these countries won the most medals in the 2012 Summer Games?", "answer": "Great Britain"]
     ]
     
     let answers = [
@@ -37,30 +37,37 @@ struct QuizModel {
         ["Yangtze", "Mississippi", "Congo", "Mekong"],
         ["Mexico City", "Cape Town", "San Juan", "Sydney"],
         ["Poland", "United States", "Sweden", "Senegal"],
-        ["France", "Germany", "Japan", "Great Britain"]
+        ["France", "Germany", "Great Britain"]
     ]
     
     mutating func getRandomQuestion() -> [String: String]? {
-        let randomInt = createRandomInt()
+        var randomInt = createRandomInt()
         
         if !questionHasBeenAskedBefore(randomInt) {
-            self.questionIndex = randomInt
-            self.questionIndicesUsed.append(randomInt)
             
-            return questions[randomInt]
+            return questionFromIndex(randomInt)
         } else {
-            return nil
+            randomInt = createRandomInt()
+
+            return questionFromIndex(randomInt)
         }
     }
     
+    mutating func questionFromIndex(index: Int) -> [String: String] {
+        self.questionIndex = index
+        self.questionIndicesUsed.append(index)
+        
+        return questions[index]
+    }
+    
     func questionHasBeenAskedBefore(question: Int) -> Bool {
-        var isUsed = Bool()
+        var hasBeenAsked = Bool()
         
         for index in questionIndicesUsed {
-            isUsed = index == question
+            hasBeenAsked = index == question
         }
         
-        return isUsed
+        return hasBeenAsked
     }
     
     func createRandomInt() -> Int {
