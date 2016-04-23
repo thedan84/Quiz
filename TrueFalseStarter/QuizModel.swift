@@ -11,9 +11,11 @@ import GameKit
 
 struct QuizModel {
     
-    var questionIndex = Int()
+    //Properties to keep track of question index and questions already asked
+    var questionIndex = 0
     var questionIndicesUsed = [Int]()
     
+    //Arrays for questions and answers
     let questions = [
         ["question": "This was the only US President to serve more than two consecutive terms.", "answer": "Franklin D. Roosevelt"],
         ["question": "Which of the following countries has the most residents?", "answer": "Nigeria"],
@@ -40,44 +42,41 @@ struct QuizModel {
         ["France", "Germany", "Great Britain"]
     ]
     
-    mutating func getRandomQuestion() -> [String: String]? {
+    //Function which returns a random question and checks if the question has been asked before
+    mutating func getRandomQuestion() -> [String: String] {
+        var question = [String: String]()
+        
         var randomInt = createRandomInt()
         
-        if !questionHasBeenAskedBefore(randomInt) {
-            
-            return questionFromIndex(randomInt)
+        if questionIndicesUsed.isEmpty || !questionIndicesUsed.contains(randomInt) {
+            questionIndex = randomInt
+            questionIndicesUsed.append(randomInt)
+            question = questions[randomInt]
         } else {
-            randomInt = createRandomInt()
-
-            return questionFromIndex(randomInt)
-        }
-    }
-    
-    mutating func questionFromIndex(index: Int) -> [String: String] {
-        self.questionIndex = index
-        self.questionIndicesUsed.append(index)
-        
-        return questions[index]
-    }
-    
-    func questionHasBeenAskedBefore(question: Int) -> Bool {
-        var hasBeenAsked = Bool()
-        
-        for index in questionIndicesUsed {
-            hasBeenAsked = index == question
+            for index in questionIndicesUsed {
+                while randomInt == index {
+                    randomInt = createRandomInt()
+                    questionIndex = randomInt
+                    questionIndicesUsed.append(randomInt)
+                    question = questions[randomInt]
+                }
+            }
         }
         
-        return hasBeenAsked
+        return question
     }
     
+    //Helper method to create a random integer
     func createRandomInt() -> Int {
         return GKRandomSource.sharedRandom().nextIntWithUpperBound(questions.count)
     }
     
+    //Function which returns possible answers in regard of the current question index
     func getPossibleAnswersToRandomQuestion() -> [String] {
         return answers[questionIndex]
     }
     
+    //Function which returns the correct answer to the current question
     func getCorrectAnswerToQuestion() -> String {
         let question = questions[questionIndex]
         let answer = question["answer"]
