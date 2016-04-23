@@ -17,29 +17,23 @@ struct QuizModel {
     
     //Arrays for questions and answers
     let questions = [
-        ["question": "This was the only US President to serve more than two consecutive terms.", "answer": "Franklin D. Roosevelt"],
-        ["question": "Which of the following countries has the most residents?", "answer": "Nigeria"],
-        ["question": "In what year was the United Nations founded?", "answer": "1945"],
-        ["question": "The Titanic departed from the United Kingdom, where was it supposed to arrive?", "answer": "New York City"],
-        ["question": "Which nation produces the most oil?", "answer": "Canada"],
-        ["question": "Which country has most recently won consecutive World Cups in Soccer?", "answer": "Brazil"],
-        ["question": "Which of the following rivers is longest?", "answer": "Mississippi"],
-        ["question": "Which city is the oldest?", "answer": "Mexico City"],
-        ["question": "Which country was the first to allow women to vote in national elections?", "answer": "Poland"],
-        ["question": "Which of these countries won the most medals in the 2012 Summer Games?", "answer": "Great Britain"]
+        ["question": "When was Apple Inc. founded?", "answer": "1976"],
+        ["question": "Which was NOT among the first computers Apple built?", "answer": "Macintosh"],
+        ["question": "How many Steves were involved in the foundation of Apple Inc.?", "answer": "2"],
+        ["question": "When was the first iPhone announced?", "answer": "2007"],
+        ["question": "How many iPhone apps are on the App Store?", "answer": "More than a million"],
+        ["question": "How was Steve Jobs middlename?", "answer": "Paul"],
+        ["question": "When was the first iPad announced?", "answer": "2010"]
     ]
     
     let answers = [
-        ["George Washington", "Franklin D. Roosevelt", "Woodrow Wilson", "Andrew Jackson"],
-        ["Nigeria", "Russia", "Iran", "Vietnam"],
-        ["1918", "1919", "1945", "1954"],
-        ["Paris", "Washington D.C.", "New York City", "Boston"],
-        ["Iran", "Iraq", "Brazil", "Canada"],
-        ["Italy", "Brazil", "Argentina", "Spain"],
-        ["Yangtze", "Mississippi", "Congo", "Mekong"],
-        ["Mexico City", "Cape Town", "San Juan", "Sydney"],
-        ["Poland", "United States", "Sweden", "Senegal"],
-        ["France", "Germany", "Great Britain"]
+        ["1975", "1976", "1977"],
+        ["Apple I", "Macintosh", "Apple Lisa", "Apple II"],
+        ["1", "2", "3", "None"],
+        ["2006", "2007", "2008"],
+        ["A few thousand", "More than a hundred thousand", "More than a million"],
+        ["Paul", "Peter", "Pablo"],
+        ["2008", "2009", "2010", "2011"]
     ]
     
     //Function which returns a random question and checks if the question has been asked before

@@ -25,8 +25,6 @@ class ViewController: UIViewController {
     var questionsAsked = 0
     var correctQuestions = 0
     
-//    var gameSound: SystemSoundID = 0
-
     var quizModel = QuizModel()
     var sound = Sound()
     
@@ -83,9 +81,13 @@ class ViewController: UIViewController {
         if sender.titleLabel?.text! == answer {
             correctQuestions += 1
             questionField.text = "Correct!"
+            
+            //Play right answer sound
             sound.playRightAnswerSound()
         } else {
             questionField.text = "Sorry, wrong answer!"
+            
+            //Play wrong answer sound
             sound.playWrongAnswerSound()
             
             if quizModel.getPossibleAnswersToRandomQuestion().count == 4 {

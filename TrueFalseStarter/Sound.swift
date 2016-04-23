@@ -11,10 +11,12 @@ import AudioToolbox
 
 struct Sound {
     
+    //Properties
     var gameSound: SystemSoundID = 0
     var rightAnswerSound: SystemSoundID = 1
     var wrongAnswerSound: SystemSoundID = 2
     
+    //Properties which get the right sound based on path
     var gameStartSound: NSURL {
         let pathToSoundFile = NSBundle.mainBundle().pathForResource("GameSound", ofType: "wav")
         return NSURL(fileURLWithPath: pathToSoundFile!)
@@ -30,11 +32,12 @@ struct Sound {
         return NSURL(fileURLWithPath: pathToSoundFile!)
     }
     
+    //Helper function to load the right sound from the bundle url
     mutating func loadSoundWithURL(URL: NSURL, inout id: SystemSoundID) {
-        
         AudioServicesCreateSystemSoundID(URL, &id)
     }
     
+    //Helper functions to play the right sound
     mutating func playGameStartSound() {
         loadSoundWithURL(gameStartSound, id: &gameSound)
         AudioServicesPlaySystemSound(gameSound)
