@@ -25,16 +25,16 @@ class ViewController: UIViewController {
     var questionsAsked = 0
     var correctQuestions = 0
     
-    var gameSound: SystemSoundID = 0
+//    var gameSound: SystemSoundID = 0
 
     var quizModel = QuizModel()
+    var sound = Sound()
     
     //View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadGameStartSound()
         // Start game
-        playGameStartSound()
+        sound.playGameStartSound()
         displayQuestion()
     }
     
@@ -83,8 +83,10 @@ class ViewController: UIViewController {
         if sender.titleLabel?.text! == answer {
             correctQuestions += 1
             questionField.text = "Correct!"
+            sound.playRightAnswerSound()
         } else {
             questionField.text = "Sorry, wrong answer!"
+            sound.playWrongAnswerSound()
             
             if quizModel.getPossibleAnswersToRandomQuestion().count == 4 {
                 for button in [answer1Button, answer2Button, answer3Button, answer4Button] {
@@ -152,16 +154,6 @@ class ViewController: UIViewController {
             self.nextRound()
         }
 
-    }
-    
-    func loadGameStartSound() {
-        let pathToSoundFile = NSBundle.mainBundle().pathForResource("GameSound", ofType: "wav")
-        let soundURL = NSURL(fileURLWithPath: pathToSoundFile!)
-        AudioServicesCreateSystemSoundID(soundURL, &gameSound)
-    }
-    
-    func playGameStartSound() {
-        AudioServicesPlaySystemSound(gameSound)
     }
 }
 
