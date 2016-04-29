@@ -25,7 +25,7 @@ class ViewController: UIViewController {
     var questionsAsked = 0
     var correctQuestions = 0
     
-    var quizModel = QuizModel()
+    var quizManager = QuizManager()
     var sound = Sound()
     
     //View lifecycle
@@ -39,10 +39,10 @@ class ViewController: UIViewController {
     //Display the current question and determine if there are 3 or 4 possible answers
     func displayQuestion() {
         
-        let question = quizModel.getRandomQuestion()["question"]
+        let question = quizManager.getRandomQuestion()
             questionField.text = question
             
-            let answers = quizModel.getPossibleAnswersToRandomQuestion()
+            let answers = quizManager.getPossibleAnswersToRandomQuestion()
             
             if answers.count == 4 {
                 answer4Button.hidden = false
@@ -76,7 +76,7 @@ class ViewController: UIViewController {
         // Increment the questions asked counter
         questionsAsked += 1
         
-        let answer = quizModel.getCorrectAnswerToQuestion()
+        let answer = quizManager.getCorrectAnswerToQuestion()
         
         if sender.titleLabel?.text! == answer {
             correctQuestions += 1
@@ -90,13 +90,13 @@ class ViewController: UIViewController {
             //Play wrong answer sound
             sound.playWrongAnswerSound()
             
-            if quizModel.getPossibleAnswersToRandomQuestion().count == 4 {
+            if quizManager.getPossibleAnswersToRandomQuestion().count == 4 {
                 for button in [answer1Button, answer2Button, answer3Button, answer4Button] {
                     if button.titleLabel?.text! == answer {
                         self.showCorrectAnswerWithDelay(button, seconds: 2)
                     }
                 }
-            } else if quizModel.getPossibleAnswersToRandomQuestion().count == 3 {
+            } else if quizManager.getPossibleAnswersToRandomQuestion().count == 3 {
                 for button in [answer1Button, answer2Button, answer3Button] {
                     if button.titleLabel?.text! == answer {
                         self.showCorrectAnswerWithDelay(button, seconds: 2)
@@ -123,7 +123,7 @@ class ViewController: UIViewController {
     @IBAction func playAgain() {
         questionsAsked = 0
         correctQuestions = 0
-        quizModel.questionIndicesUsed = []
+        quizManager.questionIndicesUsed = []
         nextRound()
     }
     
@@ -155,7 +155,5 @@ class ViewController: UIViewController {
             correctAnswer.setTitleColor(.whiteColor(), forState: .Normal)
             self.nextRound()
         }
-
     }
 }
-
