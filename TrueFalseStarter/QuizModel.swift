@@ -62,7 +62,7 @@ struct QuizModel {
     
     //Helper method to create a random integer
     func createRandomInt() -> Int {
-        return GKRandomSource.sharedRandom().nextIntWithUpperBound(questions.count)
+        return GKRandomSource.sharedRandom().nextInt(upperBound: questions.count)
     }
     
     //Function which returns possible answers in regard of the current question index

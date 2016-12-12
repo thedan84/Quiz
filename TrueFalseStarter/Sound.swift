@@ -17,24 +17,24 @@ struct Sound {
     var wrongAnswerSound: SystemSoundID = 2
     
     //Properties which get the right sound based on path
-    var gameStartSound: NSURL {
-        let pathToSoundFile = NSBundle.mainBundle().pathForResource("GameSound", ofType: "wav")
-        return NSURL(fileURLWithPath: pathToSoundFile!)
+    var gameStartSound: URL {
+        let pathToSoundFile = Bundle.main.path(forResource: "GameSound", ofType: "wav")
+        return URL(fileURLWithPath: pathToSoundFile!)
     }
     
-    var rightSound: NSURL {
-        let pathToSoundFile = NSBundle.mainBundle().pathForResource("RightSound", ofType: "wav")
-        return NSURL(fileURLWithPath: pathToSoundFile!)
+    var rightSound: URL {
+        let pathToSoundFile = Bundle.main.path(forResource: "RightSound", ofType: "wav")
+        return URL(fileURLWithPath: pathToSoundFile!)
     }
     
-    var wrongSound: NSURL {
-        let pathToSoundFile = NSBundle.mainBundle().pathForResource("WrongSound", ofType: "wav")
-        return NSURL(fileURLWithPath: pathToSoundFile!)
+    var wrongSound: URL {
+        let pathToSoundFile = Bundle.main.path(forResource: "WrongSound", ofType: "wav")
+        return URL(fileURLWithPath: pathToSoundFile!)
     }
     
     //Helper function to load the right sound from the bundle url
-    mutating func loadSoundWithURL(URL: NSURL, inout id: SystemSoundID) {
-        AudioServicesCreateSystemSoundID(URL, &id)
+    mutating func loadSoundWithURL(_ URL: Foundation.URL, id: inout SystemSoundID) {
+        AudioServicesCreateSystemSoundID(URL as CFURL, &id)
     }
     
     //Helper functions to play the right sound
