@@ -10,47 +10,79 @@ import Foundation
 import AudioToolbox
 
 struct Sound {
+
+    //MARK: - System Sounds
+    private static let gameStartSound: SystemSoundID = {
+        let pathToSoundFile = Bundle.main.url(forResource: "GameSound", withExtension: "wav")!
+        var soundID: SystemSoundID = 0
+        AudioServicesCreateSystemSoundID(pathToSoundFile as CFURL, &soundID)
+        return soundID
+    }()
     
-    //Properties
-    var gameSound: SystemSoundID = 0
-    var rightAnswerSound: SystemSoundID = 1
-    var wrongAnswerSound: SystemSoundID = 2
+    private static let rightSound: SystemSoundID = {
+        let pathToSoundFile = Bundle.main.url(forResource: "RightSound", withExtension: "wav")!
+        var soundID: SystemSoundID = 0
+        AudioServicesCreateSystemSoundID(pathToSoundFile as CFURL, &soundID)
+        return soundID
+    }()
     
-    //Properties which get the right sound based on path
-    var gameStartSound: URL {
-        let pathToSoundFile = Bundle.main.path(forResource: "GameSound", ofType: "wav")
-        return URL(fileURLWithPath: pathToSoundFile!)
+    private static let wrongSound: SystemSoundID = {
+        let pathToSoundFile = Bundle.main.url(forResource: "WrongSound", withExtension: "wav")!
+        var soundID: SystemSoundID = 0
+        AudioServicesCreateSystemSoundID(pathToSoundFile as CFURL, &soundID)
+        return soundID
+    }()
+    
+    //MARK: - Private initializer
+    private init() {}
+    
+    //MARK: - Play sound functions
+    static func playGameStartSound() {
+        AudioServicesPlaySystemSound(gameStartSound)
     }
     
-    var rightSound: URL {
-        let pathToSoundFile = Bundle.main.path(forResource: "RightSound", ofType: "wav")
-        return URL(fileURLWithPath: pathToSoundFile!)
+    static func playRightAnswerSound() {
+        AudioServicesPlaySystemSound(rightSound)
     }
     
-    var wrongSound: URL {
-        let pathToSoundFile = Bundle.main.path(forResource: "WrongSound", ofType: "wav")
-        return URL(fileURLWithPath: pathToSoundFile!)
+    static func playWrongAnswerSound() {
+        AudioServicesPlaySystemSound(wrongSound)
     }
-    
-    //Helper function to load the right sound from the bundle url
-    mutating func loadSoundWithURL(_ URL: Foundation.URL, id: inout SystemSoundID) {
-        AudioServicesCreateSystemSoundID(URL as CFURL, &id)
-    }
-    
-    //Helper functions to play the right sound
-    mutating func playGameStartSound() {
-        loadSoundWithURL(gameStartSound, id: &gameSound)
-        AudioServicesPlaySystemSound(gameSound)
-    }
-    
-    mutating func playRightAnswerSound() {
-        loadSoundWithURL(rightSound, id: &rightAnswerSound)
-        AudioServicesPlaySystemSound(rightAnswerSound)
-    }
-    
-    mutating func playWrongAnswerSound() {
-        loadSoundWithURL(wrongSound, id: &wrongAnswerSound)
-        AudioServicesPlaySystemSound(wrongAnswerSound)
-    }
-    
 }
+
+
+/*
+ 
+ struct Sound {
+ 
+ //MARK: - System Sounds
+ private static let rightAnswerSound: SystemSoundID = {
+ let pathToSoundFile = Bundle.main.url(forResource: "CorrectDing", withExtension: "wav")!
+ var soundID: SystemSoundID = 0
+ AudioServicesCreateSystemSoundID(pathToSoundFile as CFURL, &soundID)
+ return soundID
+ }()
+ 
+ private static let wrongAnswerSound: SystemSoundID = {
+ let pathToSoundFile = Bundle.main.url(forResource: "IncorrectBuzz", withExtension: "wav")!
+ var soundID: SystemSoundID = 0
+ AudioServicesCreateSystemSoundID(pathToSoundFile as CFURL, &soundID)
+ return soundID
+ }()
+ 
+ //MARK: - Private Initializer
+ private init() {}
+ 
+ //MARK: - Play sound functions
+ static func playRightAnswerSound() {
+ AudioServicesPlaySystemSound(rightAnswerSound)
+ }
+ 
+ static func playWrongAnswerSound() {
+ AudioServicesPlaySystemSound(wrongAnswerSound)
+ }
+ 
+ }
+ 
+ 
+ */

@@ -26,13 +26,12 @@ class ViewController: UIViewController {
     var correctQuestions = 0
     
     var quizManager = QuizManager()
-    var sound = Sound()
     
     //View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         // Start game
-        sound.playGameStartSound()
+        Sound.playGameStartSound()
         displayQuestion()
     }
     
@@ -83,12 +82,12 @@ class ViewController: UIViewController {
             questionField.text = "Correct!"
             
             //Play right answer sound
-            sound.playRightAnswerSound()
+            Sound.playRightAnswerSound()
         } else {
             questionField.text = "Sorry, wrong answer!"
             
             //Play wrong answer sound
-            sound.playWrongAnswerSound()
+            Sound.playWrongAnswerSound()
             
             if quizManager.getPossibleAnswersToRandomQuestion().count == 4 {
                 for button in [answer1Button, answer2Button, answer3Button, answer4Button] {
