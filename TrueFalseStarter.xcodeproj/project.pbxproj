@@ -10,7 +10,8 @@
 		780BCC011CCB86A6007AC361 /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780BCC001CCB86A6007AC361 /* Sound.swift */; };
 		780BCC051CCB8F32007AC361 /* RightSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 780BCC041CCB8F32007AC361 /* RightSound.wav */; };
 		780BCC071CCB8FEA007AC361 /* WrongSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 780BCC061CCB8FEA007AC361 /* WrongSound.wav */; };
-		78B62AB11CC3C8150099FC05 /* QuizModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B62AB01CC3C8150099FC05 /* QuizModel.swift */; };
+		78B62AB11CC3C8150099FC05 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B62AB01CC3C8150099FC05 /* Question.swift */; };
+		78BF344022F3E9E500EBBCA0 /* QuizManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78BF343F22F3E9E500EBBCA0 /* QuizManager.swift */; };
 		97093D3C1C913506001275BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97093D3B1C913506001275BC /* AppDelegate.swift */; };
 		97093D3E1C913506001275BC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97093D3D1C913506001275BC /* ViewController.swift */; };
 		97093D411C913506001275BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97093D3F1C913506001275BC /* Main.storyboard */; };
@@ -23,7 +24,8 @@
 		780BCC001CCB86A6007AC361 /* Sound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
 		780BCC041CCB8F32007AC361 /* RightSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = RightSound.wav; sourceTree = "<group>"; };
 		780BCC061CCB8FEA007AC361 /* WrongSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = WrongSound.wav; sourceTree = "<group>"; };
-		78B62AB01CC3C8150099FC05 /* QuizModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizModel.swift; sourceTree = "<group>"; };
+		78B62AB01CC3C8150099FC05 /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
+		78BF343F22F3E9E500EBBCA0 /* QuizManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizManager.swift; sourceTree = "<group>"; };
 		97093D381C913506001275BC /* TrueFalseStarter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrueFalseStarter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97093D3B1C913506001275BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		97093D3D1C913506001275BC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -66,7 +68,8 @@
 			children = (
 				97093D3B1C913506001275BC /* AppDelegate.swift */,
 				97093D3D1C913506001275BC /* ViewController.swift */,
-				78B62AB01CC3C8150099FC05 /* QuizModel.swift */,
+				78B62AB01CC3C8150099FC05 /* Question.swift */,
+				78BF343F22F3E9E500EBBCA0 /* QuizManager.swift */,
 				780BCC001CCB86A6007AC361 /* Sound.swift */,
 				97093D3F1C913506001275BC /* Main.storyboard */,
 				97093D421C913506001275BC /* Assets.xcassets */,
@@ -106,19 +109,19 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = Treehouse;
 				TargetAttributes = {
 					97093D371C913506001275BC = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = DEYT8Z7L38;
-						LastSwiftMigration = 0930;
+						LastSwiftMigration = 1100;
 					};
 				};
 			};
 			buildConfigurationList = 97093D331C913506001275BC /* Build configuration list for PBXProject "TrueFalseStarter" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -156,7 +159,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				97093D3E1C913506001275BC /* ViewController.swift in Sources */,
-				78B62AB11CC3C8150099FC05 /* QuizModel.swift in Sources */,
+				78B62AB11CC3C8150099FC05 /* Question.swift in Sources */,
+				78BF344022F3E9E500EBBCA0 /* QuizManager.swift in Sources */,
 				97093D3C1C913506001275BC /* AppDelegate.swift in Sources */,
 				780BCC011CCB86A6007AC361 /* Sound.swift in Sources */,
 			);
@@ -188,6 +192,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -243,6 +248,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -294,13 +300,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = DEYT8Z7L38;
 				INFOPLIST_FILE = TrueFalseStarter/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.teamtreehouse.TrueFalseStarter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -310,13 +316,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = DEYT8Z7L38;
 				INFOPLIST_FILE = TrueFalseStarter/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.teamtreehouse.TrueFalseStarter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

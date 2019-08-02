@@ -7,10 +7,8 @@
 //
 
 import UIKit
-import GameKit
-import AudioToolbox
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
     
     //IBOutlets
     @IBOutlet weak var questionField: UILabel!
@@ -47,16 +45,15 @@ class ViewController: UIViewController {
                 answer4Button.isHidden = false
                 for button in [answer1Button, answer2Button, answer3Button, answer4Button] {
                     let answer = answers[(button?.tag)! - 1]
-                    button?.setTitle(answer, for: UIControlState())
+                    button?.setTitle(answer, for: UIControl.State())
                 }
             } else if answers.count == 3 {
                 answer4Button.isHidden = true
                 for button in [answer1Button, answer2Button, answer3Button] {
                     let answer = answers[(button?.tag)! - 1]
-                    button?.setTitle(answer, for: UIControlState())
+                    button?.setTitle(answer, for: UIControl.State())
                 }
             }
-        
         
         playAgainButton.isHidden = true
     }
@@ -67,7 +64,6 @@ class ViewController: UIViewController {
         playAgainButton.isHidden = false
         
         questionField.text = "Way to go!\nYou got \(correctQuestions) out of \(questionsPerRound) correct!"
-        
     }
     
     //Check the answer the player gave and show the correct answer if it's wrong
@@ -103,7 +99,6 @@ class ViewController: UIViewController {
                 }
             }
         }
-        
         
         loadNextRoundWithDelay(seconds: 2)
     }
@@ -142,7 +137,7 @@ class ViewController: UIViewController {
     
     //Color the right answer green for 'x' seconds when the user chose the wrong one
     func showCorrectAnswerWithDelay(_ correctAnswer: UIButton, seconds: Int) {
-        correctAnswer.setTitleColor(.green, for: UIControlState())
+        correctAnswer.setTitleColor(.green, for: UIControl.State())
         
         // Converts a delay in seconds to nanoseconds as signed 64 bit integer
         let delay = Int64(NSEC_PER_SEC * UInt64(seconds))
@@ -151,7 +146,7 @@ class ViewController: UIViewController {
         
         // Executes the nextRound method at the dispatch time on the main queue
         DispatchQueue.main.asyncAfter(deadline: dispatchTime) {
-            correctAnswer.setTitleColor(.white, for: UIControlState())
+            correctAnswer.setTitleColor(.white, for: UIControl.State())
             self.nextRound()
         }
     }

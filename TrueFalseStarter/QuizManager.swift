@@ -1,19 +1,12 @@
 //
-//  QuizModel.swift
+//  QuizManager.swift
 //  TrueFalseStarter
 //
-//  Created by Dennis Parussini on 17-04-16.
-//  Copyright © 2016 Treehouse. All rights reserved.
+//  Created by Dennis Parussini on 02.08.19.
+//  Copyright © 2019 Treehouse. All rights reserved.
 //
 
-import Foundation
 import GameKit
-
-struct QuizModel {
-    var question: String
-    var answer: String
-    var possibleAnswers: [String]
-}
 
 struct QuizManager {
     
@@ -23,15 +16,15 @@ struct QuizManager {
     
     //Arrays for questions and answers
     let questions = [
-        QuizModel(question: "When was Apple Inc. founded?", answer: "1976", possibleAnswers: ["1975", "1976", "1977"]),
-        QuizModel(question: "Which was NOT among the first computers Apple built?", answer: "Macintosh", possibleAnswers: ["Apple I", "Macintosh", "Apple Lisa", "Apple II"]),
-        QuizModel(question: "How many Steves were involved in the foundation of Apple Inc.?", answer: "2", possibleAnswers: ["1", "2", "3", "None"]),
-        QuizModel(question: "When was the first iPhone announced?", answer: "2007", possibleAnswers: ["2006", "2007", "2008"]),
-        QuizModel(question: "How many iPhone apps are on the App Store?", answer: "More than a million", possibleAnswers: ["A few thousand", "More than a hundred thousand", "More than a million"]),
-        QuizModel(question: "What was Steve Jobs' middlename?", answer: "Paul", possibleAnswers: ["Paul", "Peter", "Pablo"]),
-        QuizModel(question: "When was the first iPad announced?", answer: "2010", possibleAnswers: ["2008", "2009", "2010", "2011"])
+        Question(question: "When was Apple Inc. founded?", answer: "1976", possibleAnswers: ["1975", "1976", "1977"]),
+        Question(question: "Which was NOT among the first computers Apple built?", answer: "Macintosh", possibleAnswers: ["Apple I", "Macintosh", "Apple Lisa", "Apple II"]),
+        Question(question: "How many Steves were involved in the foundation of Apple Inc.?", answer: "2", possibleAnswers: ["1", "2", "3", "None"]),
+        Question(question: "When was the first iPhone announced?", answer: "2007", possibleAnswers: ["2006", "2007", "2008"]),
+        Question(question: "How many iPhone apps are on the App Store?", answer: "More than a million", possibleAnswers: ["A few thousand", "More than a hundred thousand", "More than a million"]),
+        Question(question: "What was Steve Jobs' middlename?", answer: "Paul", possibleAnswers: ["Paul", "Peter", "Pablo"]),
+        Question(question: "When was the first iPad announced?", answer: "2010", possibleAnswers: ["2008", "2009", "2010", "2011"])
     ]
-
+    
     //Function which returns a random question and checks if the question has been asked before
     mutating func getRandomQuestion() -> String {
         var question = ""
