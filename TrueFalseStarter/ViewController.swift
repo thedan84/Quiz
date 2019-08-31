@@ -17,6 +17,8 @@ final class ViewController: UIViewController {
     @IBOutlet weak var answer2Button: UIButton!
     @IBOutlet weak var answer3Button: UIButton!
     @IBOutlet weak var answer4Button: UIButton!
+    @IBOutlet var threeAnswersButtonCollection: [UIButton]!
+    @IBOutlet var fourAnswersButtonCollection: [UIButton]!
     
     //Properties
     let questionsPerRound = 4
@@ -37,21 +39,21 @@ final class ViewController: UIViewController {
     func displayQuestion() {
         
         let question = quizManager.getRandomQuestion()
-            questionField.text = question
+            questionField.text = question?.question
             
             let answers = quizManager.getPossibleAnswersToRandomQuestion()
             
             if answers.count == 4 {
                 answer4Button.isHidden = false
-                for button in [answer1Button, answer2Button, answer3Button, answer4Button] {
-                    let answer = answers[(button?.tag)! - 1]
-                    button?.setTitle(answer, for: UIControl.State())
+                for button in fourAnswersButtonCollection {
+                    let answer = answers[(button.tag) - 1]
+                    button.setTitle(answer, for: UIControl.State())
                 }
             } else if answers.count == 3 {
                 answer4Button.isHidden = true
-                for button in [answer1Button, answer2Button, answer3Button] {
-                    let answer = answers[(button?.tag)! - 1]
-                    button?.setTitle(answer, for: UIControl.State())
+                for button in threeAnswersButtonCollection {
+                    let answer = answers[(button.tag) - 1]
+                    button.setTitle(answer, for: UIControl.State())
                 }
             }
         
@@ -86,15 +88,15 @@ final class ViewController: UIViewController {
             Sound.playWrongAnswerSound()
             
             if quizManager.getPossibleAnswersToRandomQuestion().count == 4 {
-                for button in [answer1Button, answer2Button, answer3Button, answer4Button] {
-                    if button?.titleLabel?.text! == answer {
-                        self.showCorrectAnswerWithDelay(button!, seconds: 2)
+                for button in fourAnswersButtonCollection {
+                    if button.titleLabel?.text! == answer {
+                        self.showCorrectAnswerWithDelay(button, seconds: 2)
                     }
                 }
             } else if quizManager.getPossibleAnswersToRandomQuestion().count == 3 {
-                for button in [answer1Button, answer2Button, answer3Button] {
-                    if button?.titleLabel?.text! == answer {
-                        self.showCorrectAnswerWithDelay(button!, seconds: 2)
+                for button in threeAnswersButtonCollection {
+                    if button.titleLabel?.text! == answer {
+                        self.showCorrectAnswerWithDelay(button, seconds: 2)
                     }
                 }
             }
@@ -123,14 +125,19 @@ final class ViewController: UIViewController {
     
     // MARK: Helper Methods
     
-    func loadNextRoundWithDelay(seconds: Int) {
+    func delay(for seconds: Int, action: @escaping () -> Void) {
         // Converts a delay in seconds to nanoseconds as signed 64 bit integer
         let delay = Int64(NSEC_PER_SEC * UInt64(seconds))
         // Calculates a time value to execute the method given current time and delay
         let dispatchTime = DispatchTime.now() + Double(delay) / Double(NSEC_PER_SEC)
         
-        // Executes the nextRound method at the dispatch time on the main queue
         DispatchQueue.main.asyncAfter(deadline: dispatchTime) {
+            action()
+        }
+    }
+    
+    func loadNextRoundWithDelay(seconds: Int) {
+        delay(for: seconds) {
             self.nextRound()
         }
     }
@@ -138,14 +145,7 @@ final class ViewController: UIViewController {
     //Color the right answer green for 'x' seconds when the user chose the wrong one
     func showCorrectAnswerWithDelay(_ correctAnswer: UIButton, seconds: Int) {
         correctAnswer.setTitleColor(.green, for: UIControl.State())
-        
-        // Converts a delay in seconds to nanoseconds as signed 64 bit integer
-        let delay = Int64(NSEC_PER_SEC * UInt64(seconds))
-        // Calculates a time value to execute the method given current time and delay
-        let dispatchTime = DispatchTime.now() + Double(delay) / Double(NSEC_PER_SEC)
-        
-        // Executes the nextRound method at the dispatch time on the main queue
-        DispatchQueue.main.asyncAfter(deadline: dispatchTime) {
+        delay(for: seconds) {
             correctAnswer.setTitleColor(.white, for: UIControl.State())
             self.nextRound()
         }

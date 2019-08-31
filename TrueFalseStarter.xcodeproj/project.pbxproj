@@ -47,6 +47,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7814F10A231AB66200820C96 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				97093D521C932116001275BC /* GameSound.wav */,
+				780BCC041CCB8F32007AC361 /* RightSound.wav */,
+				780BCC061CCB8FEA007AC361 /* WrongSound.wav */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
 		97093D2F1C913506001275BC = {
 			isa = PBXGroup;
 			children = (
@@ -75,9 +85,7 @@
 				97093D421C913506001275BC /* Assets.xcassets */,
 				97093D441C913506001275BC /* LaunchScreen.storyboard */,
 				97093D471C913506001275BC /* Info.plist */,
-				97093D521C932116001275BC /* GameSound.wav */,
-				780BCC041CCB8F32007AC361 /* RightSound.wav */,
-				780BCC061CCB8FEA007AC361 /* WrongSound.wav */,
+				7814F10A231AB66200820C96 /* Sounds */,
 			);
 			path = TrueFalseStarter;
 			sourceTree = "<group>";

@@ -26,8 +26,8 @@ struct QuizManager {
     ]
     
     //Function which returns a random question and checks if the question has been asked before
-    mutating func getRandomQuestion() -> String {
-        var question = ""
+    mutating func getRandomQuestion() -> Question? {
+        var question: Question?
         
         var randomInt = createRandomInt()
         
@@ -35,7 +35,7 @@ struct QuizManager {
             questionIndex = randomInt
             questionIndicesUsed.append(randomInt)
             let randomQuestion = questions[randomInt]
-            question = randomQuestion.question
+            question = randomQuestion
         } else {
             for index in questionIndicesUsed {
                 while randomInt == index {
@@ -43,7 +43,7 @@ struct QuizManager {
                     questionIndex = randomInt
                     questionIndicesUsed.append(randomInt)
                     let randomQuestion = questions[randomInt]
-                    question = randomQuestion.question
+                    question = randomQuestion
                 }
             }
         }
